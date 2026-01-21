@@ -10,10 +10,12 @@
       margin: 0;
       padding: 20px;
       background: #f7f7f7;
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
+    /* Intro overlay */
     .intro {
       position: fixed;
       inset: 0;
@@ -22,6 +24,12 @@
       align-items: center;
       justify-content: center;
       z-index: 10;
+      transition: opacity 0.6s ease;
+    }
+
+    .intro.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .intro button {
@@ -31,15 +39,25 @@
       font-size: 14px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
+      opacity: 0.7;
     }
 
+    /* Card */
     .card {
       max-width: 420px;
       margin: 60px auto;
       background: white;
       border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      display: none;
+
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .card img {
@@ -47,24 +65,72 @@
       height: auto;
       display: block;
     }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 8px;
+      height: 8px;
+      background: rgba(0,0,0,0.15);
+      border-radius: 2px;
+      animation: fall 3s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
 <body>
 
+  <!-- Intro -->
   <div class="intro" id="intro">
     <button id="openBtn">Tap to open</button>
   </div>
 
+  <!-- Card -->
   <div class="card" id="card">
     <img src="./invitation.png" alt="Invitation">
   </div>
 
   <script>
-    document.getElementById('openBtn').onclick = () => {
-      document.getElementById('intro').style.display = 'none';
-      document.getElementById('card').style.display = 'block';
+    const openBtn = document.getElementById('openBtn');
+    const intro = document.getElementById('intro');
+    const card = document.getElementById('card');
+
+    openBtn.onclick = () => {
+      // Hide intro
+      intro.classList.add('hidden');
+
+      // Show card with animation
+      card.classList.add('show');
+
+      // Launch subtle confetti
+      launchConfetti();
     };
+
+    function launchConfetti() {
+      const amount = 22; // subtle amount
+
+      for (let i = 0; i < amount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animationDelay = Math.random() * 0.4 + 's';
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 3000);
+      }
+    }
   </script>
 
 </body>
