@@ -32,15 +32,27 @@
       pointer-events: none;
     }
 
-    .intro button {
-      background: none;
-      border: none;              /* ← ultra-minimal */
-      padding: 0;
-      font-size: 14px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.5;
-    }
+   .intro button {
+  background: none;
+  border: none;
+  outline: none;        /* ← removes focus ring */
+  padding: 0;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+/* Also remove mobile tap highlight */
+.intro button:focus {
+  outline: none;
+}
+
+.intro button::-moz-focus-inner {
+  border: 0;
+}
+
 
     /* Card */
     .card {
