@@ -34,12 +34,12 @@
 
     .intro button {
       background: none;
-      border: 1px solid #000;
-      padding: 12px 18px;
+      border: none;              /* ← ultra-minimal */
+      padding: 0;
       font-size: 14px;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      opacity: 0.7;
+      opacity: 0.5;
     }
 
     /* Card */
@@ -52,7 +52,7 @@
 
       opacity: 0;
       transform: translateY(16px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transition: opacity 1s ease, transform 1s ease;
     }
 
     .card.show {
@@ -72,7 +72,7 @@
       top: -10px;
       width: 8px;
       height: 8px;
-      background: rgba(0,0,0,0.15);
+      background: rgba(0,0,0,0.1);
       border-radius: 2px;
       animation: fall 3s ease-out forwards;
       pointer-events: none;
@@ -105,18 +105,13 @@
     const card = document.getElementById('card');
 
     openBtn.onclick = () => {
-      // Hide intro
       intro.classList.add('hidden');
-
-      // Show card with animation
       card.classList.add('show');
-
-      // Launch subtle confetti
       launchConfetti();
     };
 
     function launchConfetti() {
-      const amount = 22; // subtle amount
+      const amount = 20;
 
       for (let i = 0; i < amount; i++) {
         const confetti = document.createElement('div');
