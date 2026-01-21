@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invitation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f7;
+      font-family: system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    .intro {
+      position: fixed;
+      inset: 0;
+      background: #f7f7f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .intro button {
+      background: none;
+      border: 1px solid #000;
+      padding: 12px 18px;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .card {
+      max-width: 420px;
+      margin: 60px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      display: none;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="intro" id="intro">
+    <button id="openBtn">Tap to open</button>
+  </div>
+
+  <div class="card" id="card">
+    <img src="./invitation.png" alt="Invitation">
+  </div>
+
+  <script>
+    document.getElementById('openBtn').onclick = () => {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('card').style.display = 'block';
+    };
+  </script>
+
+</body>
+</html>
